@@ -1,6 +1,22 @@
 # GroundUp
 Building a game in C from the ground up attempting to use only
-the standard C library, however certain OS specific libraries may need to be used.
+the standard C library, however certain OS specific and other libraries may need to be used.
+
+A specific example may explain best the goals and approach of this project.
+Say we want to launch a new window for our game. We want to launch it "natively" in the current OS, that is our application is not a GUI.
+
+We could start of like so:
+```
+int main()
+{
+  launchWindow();
+  return 0;
+}
+```
+Now we look to define `launchWindow()`. How would be do this on linux? Well in that case we have the X windowing system for example, and there exists a C library (Xlib) to communicate with it.
+
+One could implement what Xlib does, and this certainly would be fun and educational, however that is an example of what is _not_
+the goal of this project. We would use Xlib. However we have gained knowledge and an appreciation of why such a library exists, and how it helps. And on topics surrounding it, like other windowing systems like Wayland.
 
 ## Why?
 WSIWYG tools and game frameworks and libraries are awesome,
