@@ -15,3 +15,9 @@ In the future C++ will probably be the language of development (although we are 
 
 ## Resources
 Although a different goal, there is overlap with the goals of Casey Muratori's awesome Handmade Hero project, and that was and remains an inspiration. Be sure to checkout the youtube channel (Handmade Hero), and watch the announcement trailer, its good stuff! 
+
+## Set up
+Intially development will be in GNU/Linux.
+The compiler used is gcc 7.2.0.
+The OS is Ubuntu 16.10.
+The desktop enviroment is the i3 tiling window manager (twm).
