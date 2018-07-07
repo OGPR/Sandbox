@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/philippe/Programming/obsessiongames/GroundUp/glnx_X/src/functions.c
+../../shared/functions.h
+/home/philippe/Programming/obsessiongames/GroundUp/shared/functions.h
+X11/Xlib.h
+-
+stdio.h
+-
+
+/home/philippe/Programming/obsessiongames/GroundUp/shared/functions.h
+

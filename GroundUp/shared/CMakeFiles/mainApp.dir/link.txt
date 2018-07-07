@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/mainApp.dir/mainApp.c.o  -o mainApp ../glnx_X/src/libfunctions.a -lX11 
