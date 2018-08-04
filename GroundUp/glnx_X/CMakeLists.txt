@@ -8,7 +8,7 @@ set(RUNTIME_OUTPUT_PATH${CMAKE_BINARY_DIR})
 add_subdirectory(${CMAKE_SOURCE_DIR}/src)
 #add_subdirectory(${CMAKE_SOURCE_DIR}/shared)
 
-add_executable(mainApp.bin "shared/mainApp.c")
+add_executable(mainApp.bin "../shared/mainApp.c")
 
 target_link_libraries (mainApp.bin LINK_PUBLIC functions X11)
 
