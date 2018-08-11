@@ -1,0 +1,7 @@
+#UE4 ignores
+#Leading forward slash makes sure its for files in this directory only
+/Binaries/
+/Build/
+/Intermediate/
+/Saved/
+/*.*.db
