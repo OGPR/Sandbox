@@ -1,7 +1,14 @@
-#UE4 ignores
-#Leading forward slash makes sure its for files in this directory only
-/Binaries/
-/Build/
-/Intermediate/
-/Saved/
-/*.*.db
+##########################
+# Unreal Generated Files #
+##########################
+*/Build
+*/Binaries
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+BuildingEscape/Content/StarterContent/
+
+######################
+# VS Generated Files #
+######################
+*.VC.db
