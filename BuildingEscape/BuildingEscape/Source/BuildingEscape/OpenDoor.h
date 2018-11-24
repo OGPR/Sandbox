@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
 
@@ -27,6 +28,14 @@ public:
 private:
     UPROPERTY(VisibleAnywhere)
     float OpenAngle = 90.f;
+
+    UPROPERTY(EditAnywhere)
+    ATriggerVolume* PressurePlate;
+    
+    //Pawn inherits from actor
+    UPROPERTY(EditAnywhere)
+    APawn* ActorThatOpens;
+
 
 		
 	
