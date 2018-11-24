@@ -1,11 +1,10 @@
 // Free to use, re-use, modify and share. 
 
-#include "PositionReporterRock.h"
-#include <string>
-
+#include "OpenDoor.h"
+#include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
-UPositionReporterRock::UPositionReporterRock()
+UOpenDoor::UOpenDoor()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -16,19 +15,25 @@ UPositionReporterRock::UPositionReporterRock()
 
 
 // Called when the game starts
-void UPositionReporterRock::BeginPlay()
+void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+    auto Owner = GetOwner();
+    auto Pitch = 0.f;
+    auto Yaw = 45.f;
+    auto Roll = 0.f;
+    auto NewRotation = FRotator(Pitch, Yaw, Roll);
+    Owner->SetActorRotation(NewRotation);
+    
+    
 
-    UE_LOG(LogTemp, Warning, TEXT("Position Report Reporting for Duty on Rock"));
-    auto objName = this->GetName();
-    auto strName = objName.GetCharArray();
+	
 	
 }
 
 
 // Called every frame
-void UPositionReporterRock::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
