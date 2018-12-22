@@ -18,25 +18,40 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+	
+}
+void UOpenDoor::OpenDoor()
+{
     auto Owner = GetOwner();
     auto Pitch = 0.f;
     auto Yaw = 45.f;
     auto Roll = 0.f;
     auto NewRotation = FRotator(Pitch, Yaw, Roll);
     Owner->SetActorRotation(NewRotation);
-    
-    
-
-	
-	
 }
 
+void UOpenDoor::CloseDoor()
+{
+    auto Owner = GetOwner();
+    auto Pitch = 0.f;
+    auto Yaw = 0.f;
+    auto Roll = 0.f;
+    auto NewRotation = FRotator(Pitch, Yaw, Roll);
+    Owner->SetActorRotation(NewRotation);
+}
 
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+    
+    //Poll the Trigger Volume
+    if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+    {
+        OpenDoor();
+    }
+    else
+        CloseDoor();
 }
+
 
