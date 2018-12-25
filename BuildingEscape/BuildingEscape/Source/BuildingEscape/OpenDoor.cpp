@@ -53,24 +53,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
         OpenDoor();
         TimeLastDoorOpen = GetWorld()->GetTimeSeconds();
     }
-    else
+    if (GetWorld()->GetTimeSeconds() - TimeLastDoorOpen > DoorCloseDelay)
     {
-        // >= needed: can't guarantee equality comparison with floats!
-        //Only concerend with TimeLastDoorOpen >0 - no need to call close door at start of game:
-        //although this relies on the initial condition of the door asset to be "closed".
-        if (TimeLastDoorOpen !=0 && GetWorld()->GetTimeSeconds() >=  TimeLastDoorOpen + DoorCloseDelay)
-        {
-            CloseDoor();
-            UE_LOG(LogTemp, Warning, TEXT("CloseDoor has been called"))
-                UE_LOG(LogTemp, Warning, TEXT("%f"), TimeLastDoorOpen)
-
-        }
-        else
-            UE_LOG(LogTemp, Warning, TEXT("TimeLastDoorOpen is %f, Current Time is %f, DoorCloseDelay plus timelastopen is %f"), TimeLastDoorOpen,
-                GetWorld()->GetTimeSeconds(),
-                DoorCloseDelay+ TimeLastDoorOpen)
-
+        CloseDoor();
     }
+
 
 }
 
