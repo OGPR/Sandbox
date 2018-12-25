@@ -53,7 +53,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
         OpenDoor();
         TimeLastDoorOpen = GetWorld()->GetTimeSeconds();
     }
-    else
+    else //not in volume
     {
         // >= needed: can't guarantee equality comparison with floats!
         //Only concerend with TimeLastDoorOpen >0 - no need to call close door at start of game:
