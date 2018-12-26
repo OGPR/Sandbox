@@ -27,7 +27,7 @@ void UPositionReporter::BeginPlay()
 
     //This will print x= etc
     FString ObjectPos = GetOwner()->GetTransform().GetLocation().ToString();
-    UE_LOG(LogTemp, Warning, TEXT("%s is at %s"), *ObjectName, *ObjectPos)
+    //UE_LOG(LogTemp, Warning, TEXT("%s is at %s"), *ObjectName, *ObjectPos)
 }
 
 
