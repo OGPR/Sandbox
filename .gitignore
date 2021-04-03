@@ -179,3 +179,18 @@ BuildingEscape/BuildingEscape 4.21/Content/StarterContent/Textures/T_Brick_Clay_
 BuildingEscape/BuildingEscape 4.21/Content/StarterContent/Textures/T_Brick_Clay_New_M.uasset
 BuildingEscape/BuildingEscape 4.21/Content/StarterContent/Textures/T_Brick_Clay_New_N.uasset
 BuildingEscape/BuildingEscape 4.21/Content/StarterContent/Textures/T_Brick_Clay_Old_D.uasset
+*.suo
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.ipch
+*.idb
+*.pdb
+*.exe
+*.recipe
+*.ilk
+*.log
+Win32DirectSound/Debug/Win32DirectSound.vcxproj.FileListAbsolute.txt
+*.obj
+*.tlog
