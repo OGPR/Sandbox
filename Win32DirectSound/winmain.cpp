@@ -57,65 +57,65 @@ WinMain(HINSTANCE Instance,
             readFile("Win32DirectSound_ParamInput.txt", parameterMap);
             win32InitDSound(WindowHandle, parameterMap["SamplesPerSecond"], parameterMap["BufferSize"]);
 
+            LPVOID Region1;
+            DWORD Region1Size;
+            LPVOID Region2;
+            DWORD Region2Size;
+
+
+            DWORD WriteStart = parameterMap["WriteStart"];
+            DWORD BytesToWrite = parameterMap["BytesToWrite"];
+
+            GlobalSecondarySoundBuffer->Lock(
+                WriteStart,
+                BytesToWrite,
+                &Region1,
+                &Region1Size,
+                &Region2,
+                &Region2Size,
+                0
+            );
+
+            int SquareWaveCounter = 0;
+            int SamplesPerSecond = parameterMap["SamplesPerSecond"];
+            int Frequency = parameterMap["Frequency"];
+            int SquareWavePeriod = SamplesPerSecond / Frequency;
+            int BytesPerSample = win32SetWaveFormat(SamplesPerSecond).wBitsPerSample / 8;
+            int16_t* SampleOut = (int16_t*)Region1;
+            for (DWORD SampleIndex = 0; SampleIndex < Region1Size; ++SampleIndex)
+            {
+                if (!SquareWaveCounter)
+                {
+                    SquareWaveCounter = SquareWavePeriod;
+                }
+                int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
+
+                // 2 channels
+                *SampleOut++ = SampleValue;
+                *SampleOut++ = SampleValue;
+
+                --SquareWaveCounter;
+            }
+
+            for (DWORD SampleIndex = 0; SampleIndex < Region2Size; ++SampleIndex)
+            {
+                if (!SquareWaveCounter)
+                {
+                    SquareWaveCounter = SquareWavePeriod;
+                }
+                int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
+
+                // 2 channels
+                *SampleOut++ = SampleValue;
+                *SampleOut++ = SampleValue;
+
+                --SquareWaveCounter;
+
+            }
+
             while (GlobalRunning)
             {
                 win32HandleMessage(GlobalRunning);
-
-                LPVOID Region1;
-                DWORD Region1Size;
-                LPVOID Region2;
-                DWORD Region2Size;
-
-
-                DWORD WriteStart = parameterMap["WriteStart"];
-                DWORD BytesToWrite = parameterMap["BytesToWrite"];
-
-                GlobalSecondarySoundBuffer->Lock(
-                    WriteStart,
-                    BytesToWrite,
-                    &Region1,
-                    &Region1Size,
-                    &Region2,
-                    &Region2Size,
-                    0
-                );
-
-                int SquareWaveCounter = 0;
-                int SamplesPerSecond = parameterMap["SamplesPerSecond"];
-                int Frequency = parameterMap["Frequency"];
-                int SquareWavePeriod = SamplesPerSecond / Frequency;
-                int BytesPerSample = win32SetWaveFormat(SamplesPerSecond).wBitsPerSample / 8;
-                int16_t* SampleOut = (int16_t*)Region1;
-                for (DWORD SampleIndex = 0; SampleIndex < Region1Size; ++SampleIndex)
-                {
-                    if (!SquareWaveCounter)
-                    {
-                        SquareWaveCounter = SquareWavePeriod;
-                    }
-                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
-
-                    // 2 channels
-                    *SampleOut++ = SampleValue;
-                    *SampleOut++ = SampleValue;
-
-                    --SquareWaveCounter;
-                }
-
-                for (DWORD SampleIndex = 0; SampleIndex < Region2Size; ++SampleIndex)
-                {
-                    if (!SquareWaveCounter)
-                    {
-                        SquareWaveCounter = SquareWavePeriod;
-                    }
-                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
-
-                    // 2 channels
-                    *SampleOut++ = SampleValue;
-                    *SampleOut++ = SampleValue;
-
-                    --SquareWaveCounter;
-
-                }
 
                 GlobalSecondarySoundBuffer->Play(0, 0, DSBPLAY_LOOPING);
             }
