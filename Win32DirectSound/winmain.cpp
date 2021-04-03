@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "Sound.h"
 #include "MainWindowCallback.h"
+#include "MessageHandling.h"
 
 
 int CALLBACK
@@ -36,24 +37,13 @@ WinMain(HINSTANCE Instance,
             0);
         if (WindowHandle)
         {
-            win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
-
-            MSG Message = {};
             GlobalRunning = true;
+
+            win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
 
             while (GlobalRunning)
             {
-                OutputDebugStringA("GlobalRunning\n");
-                while (PeekMessageA(&Message, 0, 0, 0, PM_REMOVE))
-                {
-                    if (Message.message == WM_QUIT)
-                    {
-                        GlobalRunning = false;
-                    }
-                    TranslateMessage(&Message);
-                    DispatchMessageA(&Message);
-
-                }
+                win32HandleMessage(GlobalRunning);
 
                 LPVOID Region1;
                 DWORD Region1Size;
