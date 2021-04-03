@@ -85,8 +85,6 @@ WinMain(HINSTANCE Instance,
                 int SquareWavePeriod = SamplesPerSecond / Frequency;
                 int BytesPerSample = win32SetWaveFormat(SamplesPerSecond).wBitsPerSample / 8;
                 int16_t* SampleOut = (int16_t*)Region1;
-                DWORD Region1SampleCount = Region1Size / BytesPerSample;
-                DWORD Region2SampleCount = Region2Size / BytesPerSample;
                 for (DWORD SampleIndex = 0; SampleIndex < Region1Size; ++SampleIndex)
                 {
                     if (!SquareWaveCounter)
