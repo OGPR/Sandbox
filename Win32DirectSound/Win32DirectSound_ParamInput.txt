@@ -1,6 +1,6 @@
 SamplesPerSecond=48000
 Frequency=256
 WriteStart=0
-BytesToWrite=200
+BytesToWrite=20000
 Volume=10
 

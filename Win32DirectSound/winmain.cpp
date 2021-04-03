@@ -113,11 +113,11 @@ WinMain(HINSTANCE Instance,
 
             }
 
+            GlobalSecondarySoundBuffer->Play(0, 0, DSBPLAY_LOOPING);
             while (GlobalRunning)
             {
                 win32HandleMessage(GlobalRunning);
 
-                GlobalSecondarySoundBuffer->Play(0, 0, DSBPLAY_LOOPING);
             }
         }
     }
