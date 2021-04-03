@@ -1,9 +1,9 @@
 #ifndef FILEREADER__H
 #define FILEREADER__H
 #include <fstream>
-#include <vector>
+#include <map>
 
-void readFile(std::string fileName, std::vector<unsigned long>& parameters);
+void readFile(std::string fileName, std::map<std::string, unsigned long>& parameterMap);
 
 
 

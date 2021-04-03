@@ -3,7 +3,7 @@
 #include "MainWindowCallback.h"
 #include "MessageHandling.h"
 #include "FileReader.h"
-#include <vector>
+#include <map>
 
 
 int CALLBACK
@@ -44,10 +44,17 @@ WinMain(HINSTANCE Instance,
         {
             GlobalRunning = true;
 
+            std::map < std::string, unsigned long> parameterMap
+            {
+                {"SamplesPerSecond", 48000},
+                {"Frequency", 256},
+                {"WriteStart", 0},
+                {"BytesToWrite", 2},
+                {"BufferSize", 48000 * sizeof(int16_t) * 2}
+            };
 
-
-
-            win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
+            readFile("Win32DirectSound_ParamInput.txt", parameterMap);
+            win32InitDSound(WindowHandle, parameterMap["SamplesPerSecond"], parameterMap["BufferSize"]);
 
             while (GlobalRunning)
             {
@@ -58,11 +65,9 @@ WinMain(HINSTANCE Instance,
                 LPVOID Region2;
                 DWORD Region2Size;
 
-                std::vector<unsigned long> parameters;
-                readFile("Win32DirectSound_ParamInput.txt", parameters);
 
-                DWORD WriteStart = parameters[2];
-                DWORD BytesToWrite = parameters[3];
+                DWORD WriteStart = parameterMap["WriteStart"];
+                DWORD BytesToWrite = parameterMap["BytesToWrite"];
 
                 GlobalSecondarySoundBuffer->Lock(
                     WriteStart,
@@ -75,8 +80,8 @@ WinMain(HINSTANCE Instance,
                 );
 
                 int SquareWaveCounter = 0;
-                int SamplesPerSecond = parameters[0];
-                int Frequency = parameters[1];
+                int SamplesPerSecond = parameterMap["SamplesPerSecond"];
+                int Frequency = parameterMap["Frequency"];
                 int SquareWavePeriod = SamplesPerSecond / Frequency;
                 int BytesPerSample = win32SetWaveFormat(SamplesPerSecond).wBitsPerSample / 8;
                 int16_t* SampleOut = (int16_t*)Region1;
