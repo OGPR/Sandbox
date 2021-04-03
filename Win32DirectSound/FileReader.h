@@ -3,7 +3,7 @@
 #include <fstream>
 #include <map>
 
-void readFile(std::string fileName, std::map<std::string, unsigned long>& parameterMap);
+void readFile(std::string fileName, std::map<std::string, int>& parameterMap);
 
 
 

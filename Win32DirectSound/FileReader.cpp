@@ -2,7 +2,7 @@
 #include <string>
 #include <algorithm>
 
-void readFile(std::string fileName, std::map<std::string, unsigned long>& parameterMap)
+void readFile(std::string fileName, std::map<std::string, int>& parameterMap)
 {
     std::ifstream inputFile;
 
@@ -21,7 +21,7 @@ void readFile(std::string fileName, std::map<std::string, unsigned long>& parame
             continue;
         std::string parameterName(std::begin(line), it);
         std::string valueAsString(++it, std::end(line));
-        parameterMap[parameterName] = std::stoul(valueAsString);
+        parameterMap[parameterName] = std::stoi(valueAsString);
     }
 
     inputFile.close();

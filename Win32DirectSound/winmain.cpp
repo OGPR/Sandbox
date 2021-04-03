@@ -44,13 +44,14 @@ WinMain(HINSTANCE Instance,
         {
             GlobalRunning = true;
 
-            std::map < std::string, unsigned long> parameterMap
+            std::map < std::string, int> parameterMap
             {
                 {"SamplesPerSecond", 48000},
                 {"Frequency", 256},
                 {"WriteStart", 0},
                 {"BytesToWrite", 2},
-                {"BufferSize", 48000 * sizeof(int16_t) * 2}
+                {"BufferSize", 48000 * sizeof(int16_t) * 2},
+                {"Volume", 16}
             };
 
             readFile("Win32DirectSound_ParamInput.txt", parameterMap);
@@ -91,7 +92,7 @@ WinMain(HINSTANCE Instance,
                     {
                         SquareWaveCounter = SquareWavePeriod;
                     }
-                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? 16000 : -16000;
+                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
 
                     // 2 channels
                     *SampleOut++ = SampleValue;
@@ -106,7 +107,7 @@ WinMain(HINSTANCE Instance,
                     {
                         SquareWaveCounter = SquareWavePeriod;
                     }
-                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? 16000 : -16000;
+                    int16_t SampleValue = (SquareWaveCounter > SquareWavePeriod / 2) ? parameterMap["Volume"]*1000 : -parameterMap["Volume"]*1000;
 
                     // 2 channels
                     *SampleOut++ = SampleValue;
