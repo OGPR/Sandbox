@@ -2,6 +2,8 @@
 #include "Sound.h"
 #include "MainWindowCallback.h"
 #include "MessageHandling.h"
+#include "FileReader.h"
+#include <vector>
 
 
 int CALLBACK
@@ -11,6 +13,9 @@ WinMain(HINSTANCE Instance,
     int ShowCmd)
 {
 
+
+    std::string commandLineArg = GetCommandLineA();
+    
     WNDCLASS WindowClass = {};
 
 
@@ -25,7 +30,7 @@ WinMain(HINSTANCE Instance,
         HWND WindowHandle = CreateWindowExA(
             0,
             WindowClass.lpszClassName,
-            "HandMadeHero",
+            WindowClass.lpszClassName,
             WS_OVERLAPPEDWINDOW | WS_VISIBLE,
             CW_USEDEFAULT,
             CW_USEDEFAULT,
@@ -39,6 +44,9 @@ WinMain(HINSTANCE Instance,
         {
             GlobalRunning = true;
 
+
+
+
             win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
 
             while (GlobalRunning)
@@ -50,8 +58,11 @@ WinMain(HINSTANCE Instance,
                 LPVOID Region2;
                 DWORD Region2Size;
 
-                DWORD WriteStart = 0;
-                DWORD BytesToWrite = 2;
+                std::vector<unsigned long> parameters;
+                readFile("Win32DirectSound_ParamInput.txt", parameters);
+
+                DWORD WriteStart = parameters[2];
+                DWORD BytesToWrite = parameters[3];
 
                 GlobalSecondarySoundBuffer->Lock(
                     WriteStart,
@@ -64,8 +75,8 @@ WinMain(HINSTANCE Instance,
                 );
 
                 int SquareWaveCounter = 0;
-                int SamplesPerSecond = 48000;
-                int Frequency = 256;
+                int SamplesPerSecond = parameters[0];
+                int Frequency = parameters[1];
                 int SquareWavePeriod = SamplesPerSecond / Frequency;
                 int BytesPerSample = win32SetWaveFormat(SamplesPerSecond).wBitsPerSample / 8;
                 int16_t* SampleOut = (int16_t*)Region1;
