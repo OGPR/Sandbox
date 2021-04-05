@@ -194,3 +194,5 @@ BuildingEscape/BuildingEscape 4.21/Content/StarterContent/Textures/T_Brick_Clay_
 Win32DirectSound/Debug/Win32DirectSound.vcxproj.FileListAbsolute.txt
 *.obj
 *.tlog
+Win32DirectSound/Debug/winmain.obj.enc
+Win32DirectSound/x64/Debug/Win32DirectSound.vcxproj.FileListAbsolute.txt
